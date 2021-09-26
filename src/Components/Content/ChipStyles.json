@@ -1,0 +1,22 @@
+[
+  {
+    "normal": { "backgroundColor": "rgb(156, 156, 99)", "color": "white" },
+    "fighting": { "backgroundColor": "rgb(174, 42, 36)", "color": "white" },
+    "flying": { "backgroundColor": "rgb(142, 111, 235)", "color": "white" },
+    "poison": { "backgroundColor": "rgb(146, 58, 146)", "color": "white" },
+    "ground": { "backgroundColor": "rgb(219, 181, 77)", "color": "white" },
+    "rock": { "backgroundColor": "rgb(164, 143, 50)", "color": "white" },
+    "bug": { "backgroundColor": "rgb(151, 165, 29)", "color": "white" },
+    "ghost": { "backgroundColor": "rgb(100, 78, 136)", "color": "white" },
+    "steel": { "backgroundColor": "rgb(160, 160, 192)", "color": "white" },
+    "fire": { "backgroundColor": "rgb(237, 109, 18)", "color": "white" },
+    "water": { "backgroundColor": "rgb(69, 120, 237)", "color": "white" },
+    "grass": { "backgroundColor": "rgb(105, 194, 61)", "color": "white" },
+    "electric": { "backgroundColor": "rgb(246, 201, 19)", "color": "white" },
+    "psychic": { "backgroundColor": "rgb(247, 54, 112)", "color": "white" },
+    "ice": { "backgroundColor": "rgb(126, 206, 206)", "color": "white" },
+    "dragon": { "backgroundColor": "rgb(94, 29, 247)", "color": "white" },
+    "dark": { "backgroundColor": "rgb(100, 78, 64)", "color": "white" },
+    "fairy": { "backgroundColor": "rgb(232, 120, 144)", "color": "white" }
+  }
+]
