@@ -8,7 +8,6 @@ export default function useLocalStorage(key, defaultValue) {
   key = PREFIX + key;
   React.useEffect(() => {
     const stickyValue = window.localStorage.getItem(key);
-    console.log(stickyValue, ':11');
     if (stickyValue !== null) {
       setValue(JSON.parse(stickyValue));
       // setPromise(true);

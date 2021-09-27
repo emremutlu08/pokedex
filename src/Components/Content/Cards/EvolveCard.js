@@ -18,13 +18,10 @@ const EvolveCard = (props) => {
 
   if (!!!evolveChain)
     return <Box sx={centerStyle}>Error... {`"${pokemon}" is not exists!`}</Box>;
-  console.log(evolveChain, ':162');
   let newChain = [evolveChain];
-  console.log(newChain, ':164');
   let addToChain = [];
   for (let i = 0; i < 10; i++) {
     if (!newChain.length) {
-      console.log('Chain ends!');
       break;
     }
     const evolveDetails = newChain[0].evolution_details[0];
@@ -33,12 +30,8 @@ const EvolveCard = (props) => {
       minLevel: evolveDetails ? evolveDetails.min_level : null,
       trigger: evolveDetails ? evolveDetails.trigger.name : null,
     });
-    console.log(newChain, ':170');
-    console.log(evolveDetails, ':171');
-    console.log(newChain[0].evolves_to, ':172');
     newChain = [...newChain[0].evolves_to];
   }
-  console.log(addToChain, ':176');
   const desktopStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -72,8 +65,6 @@ const EvolveCard = (props) => {
           `https://pokeapi.co/api/v2/pokemon/${item.name}`,
         );
         if (pokemonData.isLoading) return <Loading />;
-        console.log(item, ':188');
-        console.log(item.name, ':189');
         return (
           <>
             {item.trigger && (
@@ -105,7 +96,6 @@ const EvolveCard = (props) => {
               </Card>
             )}
             <Box sx={{ height: 10 }} />
-            {console.log(pokemonData.data, ':108')}
             <Link href={`/pokemon/${pokemonData.data.id}`}>
               <PokemonCard data={pokemonData.data} />
             </Link>

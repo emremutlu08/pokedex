@@ -17,7 +17,6 @@ export default function HeaderBar() {
   if (!router.isReady) return <Loading />;
   const query = router.query;
   const notHomepage = router.pathname !== '/';
-  console.log(router, query, notHomepage, ':18');
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

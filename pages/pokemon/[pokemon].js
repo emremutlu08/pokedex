@@ -43,7 +43,6 @@ export default function PokemonDetails(props) {
 
   if (!router.isReady) return <Loading />;
   const pokemon = router.query.pokemon;
-  console.log(pokemon, 'pokemonName or ID:30');
   if (!!!pokemonData || !!!evolveChain)
     return <Box sx={centerStyle}>Error... {`"${pokemon}" is not exists!`}</Box>;
   return (

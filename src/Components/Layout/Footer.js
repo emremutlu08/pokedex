@@ -4,8 +4,6 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import NextLink from 'next/link';
-import Button from '@mui/material/Button';
-import ButtonUnstyled from '@mui/core/ButtonUnstyled';
 
 export default function Footer() {
   return (
