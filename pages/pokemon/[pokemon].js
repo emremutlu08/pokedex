@@ -17,6 +17,10 @@ import StatsCard from './../../src/Components/Content/Cards/StatsCard';
 // Runs server side
 export async function getServerSideProps(context) {
   const { pokemon } = context.params;
+  if (pokemon > 898)
+    return {
+      props: { pokemonData: null, evolveChain: null }, // will be passed to the page component as props
+    };
   const pokemonData = await axios.get(
     `https://pokeapi.co/api/v2/pokemon/${pokemon}`,
   );
@@ -44,6 +48,7 @@ export default function PokemonDetails(props) {
 
   if (!router.isReady) return <Loading />;
   const pokemon = router.query.pokemon;
+  if (pokemon > 898) return <Box sx={style}>Pokemon not found!</Box>;
   if (!!!pokemonData || !!!evolveChain)
     return <Box sx={centerStyle}>Error... {`"${pokemon}" is not exists!`}</Box>;
   return (
