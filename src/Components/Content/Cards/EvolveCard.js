@@ -15,7 +15,7 @@ import Link from './../../../Link';
 const EvolveCard = (props) => {
   const matches = useMediaQuery('(max-width:1279px)');
   const { evolveChain } = props;
-
+  console.log(evolveChain, ':18');
   if (!!!evolveChain)
     return <Box sx={centerStyle}>Error... {`"${pokemon}" is not exists!`}</Box>;
   let newChain = [evolveChain];
@@ -88,7 +88,14 @@ const EvolveCard = (props) => {
                   ) : (
                     <Box sx={evolveStyle}>
                       <CompareArrowsIcon />
-                      <Box>{capitalizer(item.trigger)}</Box>
+                      <Box>
+                        {capitalizer(item.trigger)}
+                        {evolveChain.evolves_to.length > 1 && (
+                          <Box>
+                            And {evolveChain.evolves_to.length} other forms
+                          </Box>
+                        )}
+                      </Box>
                       {matches ? <ArrowDownwardIcon /> : <ArrowForwardIcon />}
                     </Box>
                   )}
