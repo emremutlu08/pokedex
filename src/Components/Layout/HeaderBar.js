@@ -47,7 +47,7 @@ export default function HeaderBar() {
             component="div"
             sx={{ flexGrow: 1, textAlign: 'center' }}
           >
-            <Link href="/"> Pokedex </Link>
+            <Link href="/"> Pokédex</Link>
           </Typography>
 
           <NextLink href="https://project-showroom.vercel.app/">
