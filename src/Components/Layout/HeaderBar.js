@@ -12,10 +12,10 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { Loading } from '../Informative';
 
+/* Header Bar */
 export default function HeaderBar() {
   const router = useRouter();
   if (!router.isReady) return <Loading />;
-  const query = router.query;
   const notHomepage = router.pathname !== '/';
   return (
     <Box sx={{ flexGrow: 1 }}>

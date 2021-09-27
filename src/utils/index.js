@@ -1,3 +1,4 @@
+// Capitalize & Split words
 export const capitalizer = (words) => {
   words = words.replace(/[-_]/g, ' ').split(' ');
   for (let i = 0; i < words.length; i++) {

@@ -14,6 +14,7 @@ import BasicInfoCard from './../../src/Components/Content/Cards/BasicInfoCard';
 import EvolveCard from './../../src/Components/Content/Cards/EvolveCard';
 import StatsCard from './../../src/Components/Content/Cards/StatsCard';
 
+// Runs server side
 export async function getServerSideProps(context) {
   const { pokemon } = context.params;
   const pokemonData = await axios.get(

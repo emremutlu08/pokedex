@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -17,7 +17,6 @@ import { matchSorter } from 'match-sorter';
 import Stories from 'react-insta-stories';
 import Modal from '@mui/material/Modal';
 import useFetch from 'react-fetch-hook';
-import pokelist from '../../others/pokelist.json';
 import Link from './../../Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Loading } from '../Informative';

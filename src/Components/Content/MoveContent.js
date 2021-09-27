@@ -13,6 +13,8 @@ import { capitalizer } from '../../utils';
 export default function MoveContent(props) {
   const { pokemonData } = props;
   const movesArr = pokemonData.moves;
+
+  // Sort levels
   movesArr.sort((a, b) => {
     let keyA = ('0000' + a.version_group_details[0].level_learned_at).slice(-5),
       keyB = ('0000' + b.version_group_details[0].level_learned_at).slice(-5);
@@ -39,13 +41,12 @@ export default function MoveContent(props) {
           </TableHead>
           <TableBody>
             {movesArr.map((move, i) => {
-              let moveName = move.move.name;
+              let moveName = capitalizer(move.move.name);
               const moveDetails = move.version_group_details[0];
-              let learningMethod = moveDetails.move_learn_method.name;
+              let learningMethod = capitalizer(
+                moveDetails.move_learn_method.name,
+              );
               const isOdd = i % 2 !== 0;
-
-              moveName = capitalizer(moveName);
-              learningMethod = capitalizer(learningMethod);
 
               return (
                 <TableRow
