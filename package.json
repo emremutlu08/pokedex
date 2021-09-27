@@ -12,6 +12,7 @@
     "@mui/styles": "^5.0.1",
     "axios": "^0.21.4",
     "clsx": "latest",
+    "length.js": "^1.1.1",
     "match-sorter": "^6.3.1",
     "next": "latest",
     "prop-types": "latest",
@@ -19,6 +20,8 @@
     "react-dom": "latest",
     "react-fetch-hook": "^1.8.5",
     "react-insta-stories": "^2.2.5",
+    "react-toastify": "^8.0.3",
+    "react-topbar-progress-indicator": "^4.1.0",
     "react-use-localstorage": "^3.5.3",
     "use-debounce": "^7.0.0"
   },

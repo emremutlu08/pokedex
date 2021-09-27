@@ -6,7 +6,9 @@ import Typography from '@mui/material/Typography';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
+import HelpIcon from '@mui/icons-material/Help';
 import Link from './../../Link';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { Loading } from '../Informative';
 
@@ -14,8 +16,8 @@ export default function HeaderBar() {
   const router = useRouter();
   if (!router.isReady) return <Loading />;
   const query = router.query;
-  const notHomepage = Object.keys(query).length !== 0;
-  console.log(query, notHomepage, ':18');
+  const notHomepage = router.pathname !== '/';
+  console.log(router, query, notHomepage, ':18');
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -27,7 +29,6 @@ export default function HeaderBar() {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                sx={{ mr: 2 }}
               >
                 <ArrowBackIcon />
               </IconButton>
@@ -38,7 +39,6 @@ export default function HeaderBar() {
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2 }}
             >
               <HomeIcon />
             </IconButton>
@@ -50,6 +50,26 @@ export default function HeaderBar() {
           >
             <Link href="/"> Pokedex </Link>
           </Typography>
+
+          <NextLink href="https://project-showroom.vercel.app/">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: 'none',
+                color: 'white',
+              }}
+            >
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+              >
+                <HelpIcon />
+              </IconButton>
+            </a>
+          </NextLink>
         </Toolbar>
       </AppBar>
     </Box>

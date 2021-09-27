@@ -35,7 +35,6 @@ export default function PokemonDetails(props) {
   const style = matches ? { p: 1 } : { p: 10 };
   const router = useRouter();
   const centerStyle = {
-    width: '100vw',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

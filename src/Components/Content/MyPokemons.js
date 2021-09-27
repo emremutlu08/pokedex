@@ -17,13 +17,80 @@ import { matchSorter } from 'match-sorter';
 import Stories from 'react-insta-stories';
 import Modal from '@mui/material/Modal';
 import useFetch from 'react-fetch-hook';
-import Link from '../../Link';
+import pokelist from '../../others/pokelist.json';
+import Link from './../../Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Loading } from '../Informative';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { makeStyles } from '@mui/styles';
+import { grey } from '@mui/material/colors';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { capitalizer } from '../../utils';
 
-export default function MyPokemons() {
+const useStyles = makeStyles({
+  cont: {
+    background: '-webkit-linear-gradient(left top, crimson 0%, #f90 100%)',
+    borderRadius: '50%',
+    padding: '5px',
+  },
+  contClicked: {
+    background: grey[500],
+    borderRadius: '50%',
+    padding: '5px',
+  },
+  box: {
+    background: grey[900],
+    borderRadius: '50%',
+    margin: 1,
+  },
+  ballBorder: {
+    background: '-webkit-linear-gradient(left top, crimson 0%, #f90 100%)',
+    borderRadius: '50%',
+    padding: '2px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+const objectIncludes = (array, searchFor) => {
+  return array.some((x) => JSON.stringify(x) === JSON.stringify(searchFor));
+};
+
+export default function Content(props) {
+  const notifyCatched = (name) =>
+    toast(`You catch ${capitalizer(name)}!`, {
+      icon: ({ theme, type }) => (
+        <Box className={classes.ballBorder}>
+          <Image
+            alt="Pokemon"
+            placeholder="blur"
+            blurDataURL="/assets/pokeball.png"
+            src={`/assets/pokeball.png`}
+            width={50}
+            height={50}
+            className={classes.ballBorder}
+          />
+        </Box>
+      ),
+    });
+  const notifyReleased = (name) =>
+    toast(`You release ${capitalizer(name)}!`, {
+      icon: ({ theme, type }) => (
+        <Image
+          alt="Pokemon"
+          placeholder="blur"
+          blurDataURL="/assets/pokeball-open.png"
+          src={`/assets/pokeball-open.png`}
+          width={50}
+          height={50}
+          className={classes.ballBorder}
+        />
+      ),
+    });
+  const classes = useStyles(props);
   const [item, setItem] = useLocalStorage('list', []);
+  const [viewedStories, setViewedStories] = useLocalStorage('story', []);
   const matches = useMediaQuery('(max-width:600px)');
   const [text, setText] = React.useState('');
   const [searchResults, setSearchResults] = React.useState([]);
@@ -33,6 +100,7 @@ export default function MyPokemons() {
   const handleClose = () => {
     setOpenStory(false);
   };
+
   React.useEffect(() => {
     let result = matchSorter(item, value, { keys: ['name', 'id'] });
 
@@ -49,8 +117,7 @@ export default function MyPokemons() {
     // Show at most 36 Pokémons
     result = result.slice(0, 36);
     setSearchResults(result);
-  }, [value, item]);
-
+  }, [value, item, viewedStories]);
   function App() {
     return (
       <Stories
@@ -163,8 +230,8 @@ export default function MyPokemons() {
         <Box
           sx={{
             bgcolor: 'background.paper',
-            pt: 8,
-            pb: 6,
+            pt: 2,
+            pb: 2,
           }}
         >
           <Container maxWidth="sm">
@@ -178,7 +245,7 @@ export default function MyPokemons() {
                 <Button variant="contained">All Pokémons</Button>
               </Link>
               <Link href="/my-pokemons">
-                <Button variant="outlined">My Pokémons</Button>
+                <Button variant="outlined">My Pokémons ({item.length})</Button>
               </Link>
             </Stack>
           </Container>
@@ -196,30 +263,51 @@ export default function MyPokemons() {
                   md={2}
                 >
                   <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-                    <Avatar
-                      sx={{ width: 100, height: 100, cursor: 'pointer' }}
-                      onClick={() => {
-                        setOpenStory(true);
-                        setSelectedResult(result);
-                      }}
+                    <Box
+                      className={
+                        objectIncludes(viewedStories, result)
+                          ? classes.contClicked
+                          : classes.cont
+                      }
                     >
-                      <Image
-                        alt="Pokemon"
-                        placeholder="blur"
-                        // blurDataURL="/assets/pokeball.png"
-                        blurDataURL={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${result.id}.png`}
-                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${result.id}.png`}
-                        width={90}
-                        height={90}
-                      />
-                    </Avatar>
-                    {item.includes(result) ? (
+                      <Avatar
+                        className={classes.box}
+                        sx={{ width: 100, height: 100, cursor: 'pointer' }}
+                        onClick={() => {
+                          setViewedStories((prevPokemon) => {
+                            if (objectIncludes(prevPokemon, result))
+                              return [...prevPokemon];
+                            return [...prevPokemon, result];
+                          });
+                          setOpenStory(true);
+                          setSelectedResult(result);
+                        }}
+                      >
+                        <Image
+                          alt="Pokemon"
+                          placeholder="blur"
+                          // blurDataURL="/assets/pokeball.png"
+                          blurDataURL={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${result.id}.png`}
+                          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${result.id}.png`}
+                          width={90}
+                          height={90}
+                        />
+                      </Avatar>
+                    </Box>
+                    {objectIncludes(item, result) ? (
                       <IconButton
                         aria-label="remove"
                         color="primary"
                         sx={{ width: 20, height: 20 }}
                         onClick={() => {
-                          setItem(item.filter((pokemon) => pokemon !== result));
+                          notifyReleased(result.name);
+                          setItem(
+                            item.filter(
+                              (pokemon) =>
+                                JSON.stringify(pokemon) !==
+                                JSON.stringify(result),
+                            ),
+                          );
                         }}
                       >
                         <RemoveIcon />
@@ -230,8 +318,9 @@ export default function MyPokemons() {
                         color="primary"
                         sx={{ width: 20, height: 20 }}
                         onClick={() => {
+                          notifyCatched(result.name);
                           setItem((prevPokemon) => {
-                            if (prevPokemon.includes(result))
+                            if (objectIncludes(prevPokemon, result))
                               return [...prevPokemon];
                             return [...prevPokemon, result];
                           });
@@ -272,6 +361,18 @@ export default function MyPokemons() {
           <App pokemonResult={selectedResult} />
         </Modal>
       </main>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastStyle={{ backgroundColor: '#121212', color: '#eee' }}
+      />
     </>
   );
 }

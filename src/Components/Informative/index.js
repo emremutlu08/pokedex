@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const centerStyle = {
-  width: '100vw',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

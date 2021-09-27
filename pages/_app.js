@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useState } from 'react';
+import Router from 'next/router';
+import TopBarProgress from 'react-topbar-progress-indicator';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { ThemeProvider } from '@mui/material/styles';
@@ -15,6 +18,16 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const [progress, setProgress] = useState(false);
+  Router.events.on('routeChangeStart', () => {
+    setProgress(true);
+    //function will fired when route change started
+  });
+
+  Router.events.on('routeChangeComplete', () => {
+    setProgress(false);
+    //function will fired when route change ended
+  });
 
   // Main Classes
   const useStyles = makeStyles(() => ({
@@ -32,22 +45,28 @@ export default function MyApp(props) {
         background: '#d8d8d8',
       },
     },
+    main: {},
   }));
-
+  const classes = useStyles();
   return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <title>Pokédex</title>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <CssBaseline />
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <HeaderBar />
-        <Component {...pageProps} />
-        <Footer />
-      </ThemeProvider>
-    </CacheProvider>
+    <>
+      {progress && <TopBarProgress />}
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <title>Pokédex</title>
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+        </Head>
+        <CssBaseline />
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <main className={classes.main}>
+            <HeaderBar />
+            <Component {...pageProps} />
+            <Footer />
+          </main>
+        </ThemeProvider>
+      </CacheProvider>
+    </>
   );
 }
 

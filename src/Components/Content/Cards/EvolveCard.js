@@ -10,6 +10,7 @@ import Image from 'next/image';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import Link from './../../../Link';
 
 const EvolveCard = (props) => {
   const matches = useMediaQuery('(max-width:1279px)');
@@ -76,7 +77,7 @@ const EvolveCard = (props) => {
         return (
           <>
             {item.trigger && (
-              <Card sx={{ p: 2, textAlign: 'center' }}>
+              <Card sx={{ m: 1, p: 1, textAlign: 'center' }} key={item.name}>
                 <Typography variant="body2">
                   {item.minLevel ? (
                     <Box sx={evolveStyle}>
@@ -104,7 +105,10 @@ const EvolveCard = (props) => {
               </Card>
             )}
             <Box sx={{ height: 10 }} />
-            <PokemonCard data={pokemonData.data} />
+            {console.log(pokemonData.data, ':108')}
+            <Link href={`/pokemon/${pokemonData.data.id}`}>
+              <PokemonCard data={pokemonData.data} />
+            </Link>
             <Box sx={{ height: 10 }} />
           </>
         );

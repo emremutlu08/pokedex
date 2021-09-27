@@ -55,13 +55,19 @@ export default function MoveContent(props) {
                     backgroundColor: isOdd && lightBlue[200],
                   }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{ color: isOdd && 'white' }}
+                  >
                     {moveName}
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell align="right" sx={{ color: isOdd && 'white' }}>
                     {moveDetails.level_learned_at}
                   </TableCell>
-                  <TableCell align="right">{learningMethod}</TableCell>
+                  <TableCell align="right" sx={{ color: isOdd && 'white' }}>
+                    {learningMethod}
+                  </TableCell>
                 </TableRow>
               );
             })}

@@ -11,6 +11,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { lightBlue } from '@mui/material/colors';
+import length from 'length.js';
 
 const BasicInfoCard = (props) => {
   const { data } = props;
@@ -54,7 +55,10 @@ const BasicInfoCard = (props) => {
                         Height
                       </Typography>
                     </TableCell>
-                    <TableCell align="right">{data.height}</TableCell>
+                    <TableCell align="right">
+                      {length(data.height, 'dm').to('m').value.toFixed(1)}{' '}
+                      {length(data.height, 'dm').to('m').unit}
+                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">
@@ -66,7 +70,9 @@ const BasicInfoCard = (props) => {
                         Weight
                       </Typography>
                     </TableCell>
-                    <TableCell align="right">{data.weight}</TableCell>
+                    <TableCell align="right">
+                      {(data.weight / 10).toFixed(1)} kg
+                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="tr" scope="row">

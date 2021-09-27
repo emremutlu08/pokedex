@@ -3,6 +3,9 @@ import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
+import NextLink from 'next/link';
+import Button from '@mui/material/Button';
+import ButtonUnstyled from '@mui/core/ButtonUnstyled';
 
 export default function Footer() {
   return (
@@ -10,7 +13,18 @@ export default function Footer() {
       <Container maxWidth="md">
         <Toolbar>
           <Typography variant="body1" color="inherit">
-            © {new Date().getFullYear()} Emre MUTLU
+            <NextLink href="https://project-showroom.vercel.app/">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  textDecoration: 'none',
+                  color: 'white',
+                }}
+              >
+                © {new Date().getFullYear()} Emre MUTLU
+              </a>
+            </NextLink>
           </Typography>
         </Toolbar>
       </Container>
