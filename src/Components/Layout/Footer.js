@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import NextLink from 'next/link';
 import { makeStyles } from '@mui/styles';
-import { blue, grey } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 import ImportantDevicesIcon from '@mui/icons-material/ImportantDevices';
 
 export default function Footer() {
